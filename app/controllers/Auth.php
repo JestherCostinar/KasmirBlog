@@ -132,28 +132,41 @@ class Auth extends Controller
                 $data['passwordError'] = 'Please enter password';
             }
 
-            if (empty($data['username']) && empty($data['password'])) {
+            if (empty($data['usernameError']) && empty($data['passwordError'])) {
                 $loggedInUser = $this->userModel->login($data['username'], $data['password']);
 
-                if($loggedInUser) {
+                if ($loggedInUser) {
                     $this->createUserSession($loggedInUser);
-                   
+
+                    $this->view('pages/login', $data);
                 } else {
                     $data['errorMessage'] = 'Invalid Username or Password. Please Try again.';
                 }
             }
+        } else {
+            $data = [
+                'title' => 'Login',
+                'username' => '',
+                'password' => '',
+                'usernameError' => '',
+                'passwordError' => ''
+            ];
         }
-
-
-
         $this->view('pages/login', $data);
     }
 
-    public function createUserSession($user) {
-        session_start();
+    public function createUserSession($user)
+    {
         $_SESSION['user_id'] = $user->id;
         $_SESSION['username'] = $user->username;
         $_SESSION['email'] = $user->email;
+    }
 
+    public function logout()
+    {
+        unset($_SESSION['user_id']);
+        unset($_SESSION['username']);
+        unset($_SESSION['email']);
+        header('location:' . URLROOT . '/auth/login');
     }
 }

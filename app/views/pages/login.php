@@ -8,6 +8,7 @@ require APPROOT . '/views/includes/headER.php';
     ?>
 </div>
 
+<?php var_dump($_SESSION); ?>
 <div class="container-login">
     <div class="wrapper-login">
         <h2>Sign In</h2>
