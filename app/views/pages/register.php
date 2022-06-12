@@ -1,24 +1,19 @@
 <?php
-require APPROOT . '/views/includes/headER.php';
+require APPROOT . '/views/includes/header.php';
+require APPROOT . '/views/includes/navigation.php';
 ?>
 
-<div class="navbar">
-    <?php
-    require APPROOT . '/views/includes/navigation.php';
-    ?>
-</div>
-
-<div class="container-login">
-    <div class="wrapper-login">
+<section class="banner banner-login" id="banner">
+    <div class="content">
         <h2>Register</h2>
 
         <form action="<?php echo URLROOT; ?>/auth/register" method="POST">
-            <input type="text" placeholder="Username *" name="username" value="<?php echo $data['username'];?>">
+            <input type="text" placeholder="Username *" name="username" value="<?php echo $data['username']; ?>">
             <span class="invalidFeedback">
                 <?php echo $data['usernameError']; ?>
             </span>
 
-            <input type="email" placeholder="Email *" name="email" value="<?php echo $data['email'];?>">
+            <input type="email" placeholder="Email *" name="email" value="<?php echo $data['email']; ?>">
             <span class="invalidFeedback">
                 <?php echo $data['emailError']; ?>
             </span>
@@ -36,7 +31,7 @@ require APPROOT . '/views/includes/headER.php';
 
             <button id="submit" type="submit" value="submit">Submit</button>
             <p class="options">Already have an account? <a href="<?php echo URLROOT; ?>
-            /auth/login">Login</a></p>
+    /auth/login">Login</a></p>
         </form>
     </div>
-</div>
+</section>

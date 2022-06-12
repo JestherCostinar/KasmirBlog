@@ -9,8 +9,13 @@ class Pages extends Controller
 
     public function index()
     {
+        if (isLoggedIn()) {
+            $userProfile = $this->userModel->findUserById($_SESSION['user_id']);
+        } 
+
         $data = [
             'title' => 'Home',
+            'userProfile' => $userProfile
         ];
 
         $this->view('pages/index', $data);

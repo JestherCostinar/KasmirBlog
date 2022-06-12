@@ -1,10 +1,7 @@
-<?php require APPROOT . '/views/includes/header.php';
+<?php
+require APPROOT . '/views/includes/header.php';
+require APPROOT . '/views/includes/navigation.php';
 ?>
-
-<div class="navbar dark">
-    <?php require APPROOT . '/views/includes/navigation.php';
-    ?>
-</div>
 
 <div class="container center">
     <h1>

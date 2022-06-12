@@ -7,6 +7,11 @@ class Auth extends Controller
         $this->userModel = $this->model('User');
     }
 
+    public function index()
+    {
+        $this->login();
+    }
+
     // User Register Controller
     public function register()
     {
@@ -138,7 +143,7 @@ class Auth extends Controller
                 if ($loggedInUser) {
                     $this->createUserSession($loggedInUser);
 
-                    $this->view('pages/login', $data);
+                    header("location: " . URLROOT);
                 } else {
                     $data['errorMessage'] = 'Invalid Username or Password. Please Try again.';
                 }

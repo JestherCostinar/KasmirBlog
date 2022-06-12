@@ -1,16 +1,10 @@
 <?php
-require APPROOT . '/views/includes/headER.php';
+require APPROOT . '/views/includes/header.php';
+require APPROOT . '/views/includes/navigation.php';
 ?>
 
-<div class="navbar">
-    <?php
-    require APPROOT . '/views/includes/navigation.php';
-    ?>
-</div>
-
-<?php var_dump($_SESSION); ?>
-<div class="container-login">
-    <div class="wrapper-login">
+<section class="banner banner-login" id="banner">
+    <div class="content">
         <h2>Sign In</h2>
 
         <?php if (!empty($data['errorMessage'])) : ?>
@@ -34,4 +28,4 @@ require APPROOT . '/views/includes/headER.php';
             <p class="options">Not registered yet? <a href="<?php echo URLROOT; ?>/auth/register">Create an account</a></p>
         </form>
     </div>
-</div>
+</section>
