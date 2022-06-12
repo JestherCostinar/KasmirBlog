@@ -7,8 +7,9 @@ class Posts extends Controller
         $this->postsModel = $this->model('Post');
     }
 
-    public function index() {
-        $posts = $this->postsModel->findAllPosts();
+    public function index()
+    {
+        $posts = $this->postsModel->findUserPost($_SESSION['user_id']);
 
         $data = [
             'title' => "Blog",
@@ -18,8 +19,9 @@ class Posts extends Controller
         $this->view('posts/index', $data);
     }
 
-    public function create() {
-        if(!isLoggedIn()) {
+    public function create()
+    {
+        if (!isLoggedIn()) {
             header("location: " . URLROOT . "/posts");
         }
 
@@ -31,7 +33,7 @@ class Posts extends Controller
             'bodyError' => ''
         ];
 
-        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
@@ -39,19 +41,19 @@ class Posts extends Controller
                 'postTitle' => trim($_POST['postTitle']),
                 'body' => trim($_POST['body']),
                 'titleError' => '',
-                'bodyError' => ''            
+                'bodyError' => ''
             ];
 
-            if(empty($data['postTitle'])) {
+            if (empty($data['postTitle'])) {
                 $data['titleError'] = 'Please enter a title';
             }
 
-            if(empty($data['body'])) {
+            if (empty($data['body'])) {
                 $data['bodyError'] = 'Please enter a body';
             }
 
-            if(empty($data['titleError']) && empty($data['bodyError'])) {
-                if($this->postsModel->insertPost($data)) {
+            if (empty($data['titleError']) && empty($data['bodyError'])) {
+                if ($this->postsModel->insertPost($data)) {
                     header("location: " . URLROOT . "/posts");
                 } else {
                     die("Something went wrong. please try again");
@@ -64,15 +66,71 @@ class Posts extends Controller
         $this->view('posts/create', $data);
     }
 
-    public function update() {
+    public function update($id)
+    {
+        $post = $this->postsModel->findPostById($id);
+
+        if (!isLoggedIn()) {
+            header("location: " . URLROOT . "/posts");
+        } elseif ($post->user_id != $_SESSION['user_id']) {
+            header("location: " . URLROOT . "/posts");
+        }
+
         $data = [
-            'title' => "Blog"
+            'post' => $post,
+            'title' => "Update Blog",
+            'postTitle' => '',
+            'body' => '',
+            'titleError' => '',
+            'bodyError' => ''
         ];
+
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'id' => $id,
+                'post' => $post,
+                'user_id' => $_SESSION['user_id'],
+                'postTitle' => trim($_POST['postTitle']),
+                'body' => trim($_POST['body']),
+                'titleError' => '',
+                'bodyError' => ''
+            ];
+
+            if (empty($data['postTitle'])) {
+                $data['titleError'] = 'Please enter a title';
+            }
+
+            if (empty($data['body'])) {
+                $data['bodyError'] = 'Please enter a body';
+            }
+
+            if (empty($data['title']) === $this->postsModel->findPostById($id)->title) {
+                $data['titleError'] = 'Atleast change the title!';
+            }
+
+            if (empty($data['body']) === $this->postsModel->findPostById($id)->body) {
+                $data['bodyError'] = 'Atleast change the body!';
+            }
+
+            if (empty($data['titleError']) && empty($data['bodyError'])) {
+                if ($this->postsModel->updatePost($data)) {
+                    header("location: " . URLROOT . "/posts");
+                } else {
+                    die("Something went wrong. please try again");
+                }
+            } else {
+                $this->view('posts/update', $data);
+            }
+        }
 
         $this->view('posts/update', $data);
     }
 
-    public function delete() {
+    public function delete()
+    {
         $data = [
             'title' => "Blog"
         ];

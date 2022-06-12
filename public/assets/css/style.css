@@ -213,6 +213,9 @@ input::placeholder {
     color: #ffffff;
 }
 
+.black {
+    color: rgb(121, 121, 121);
+}
 .btn:hover {
     color: #ffffff;
 }
