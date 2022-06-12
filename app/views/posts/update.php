@@ -13,7 +13,7 @@
 
     <form action="<?php echo URLROOT ?>/posts/update/<?php echo $data['post']->id ?>" method="POST">
         <div class="form-item">
-            <input type="text" name="postTitle" placeholder="title..." value="<?php echo $data['post']->title ?>>">
+            <input type="text" name="postTitle" placeholder="title..." value="<?php echo $data['post']->title ?>">
             <span class="invalidFeedback">
                 <?php echo $data['titleError']; ?>
             </span>

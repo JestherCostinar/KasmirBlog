@@ -9,7 +9,11 @@ class Posts extends Controller
 
     public function index()
     {
-        $posts = $this->postsModel->findUserPost($_SESSION['user_id']);
+        if (isLoggedIn()) {
+            $posts = $this->postsModel->findUserPost($_SESSION['user_id']);
+        } else {
+            $posts = $this->postsModel->findAllPosts();
+        }
 
         $data = [
             'title' => "Blog",
@@ -129,11 +133,35 @@ class Posts extends Controller
         $this->view('posts/update', $data);
     }
 
-    public function delete()
+    public function delete($id)
     {
+        $post = $this->postsModel->findPostById($id);
+
+        if (!isLoggedIn()) {
+            header("location: " . URLROOT . "/posts");
+        } elseif ($post->user_id != $_SESSION['user_id']) {
+            header("location: " . URLROOT . "/posts");
+        }
+
         $data = [
-            'title' => "Blog"
+            'post' => $post,
+            'title' => "Update Blog",
+            'postTitle' => '',
+            'body' => '',
+            'titleError' => '',
+            'bodyError' => ''
         ];
+
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        
+            if($this->postsModel->deletePost($id)) {
+                header("location: " . URLROOT . "/posts");
+            } else {
+                die('Something went wrong');
+            }
+        }
 
         $this->view('posts/delete', $data);
     }

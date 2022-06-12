@@ -15,6 +15,9 @@
         <div class="container-item">
             <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $post->user_id) : ?>
                 <a class="btn orange" href="<?php echo URLROOT . "/posts/update/" . $post->id; ?>">Update</a>
+                <form action="<?php echo URLROOT . "/posts/delete/" . $post->id ?>" method="POST">
+                    <input type="submit" name="delete" value="delete" class="btn red">
+                </form>
             <?php endif; ?>
             <h2>
                 <?php echo $post->title; ?>

@@ -11,7 +11,7 @@
             <a class="<?= ($data['title'] == "Project" ? 'active' : ''); ?>" href="<?php echo URLROOT; ?>/pages/project">Projects</a>
         </li>
         <li>
-            <a class="<?= ($data['title'] == "Blog" ? 'active' : ''); ?>" href="<?php echo URLROOT; ?>/pages/blog">Blog</a>
+            <a class="<?= ($data['title'] == "Blog" ? 'active' : ''); ?>" href="<?php echo URLROOT; ?>/posts/index">Blog</a>
         </li>
         <li>
             <a class="<?= ($data['title'] == "Contact" ? 'active' : ''); ?>" href="<?php echo URLROOT; ?>/pages/contact">Contact</a>

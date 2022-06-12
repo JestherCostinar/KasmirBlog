@@ -269,8 +269,12 @@ textarea {
     background-color: #ff0000;
     float: right;
     width: 120px;
-    margin: 0px 20px;
+    margin: 20px;
     height: 40px;
+}
+
+.red:hover {
+    background: #992222;
 }
 
 small {
