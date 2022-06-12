@@ -11,7 +11,11 @@
         Create new post
     </h1>
 
-    <form action="<?php echo URLROOT ?>/posts/create" method="POST">
+    <form action="<?php echo URLROOT ?>/posts/create" method="POST" enctype="multipart/form-data">
+        <div class="form-item">
+            <input type="file" name="image" placeholder="Image for your blog...">
+        </div>
+
         <div class="form-item">
             <input type="text" name="postTitle" placeholder="title...">
             <span class="invalidFeedback">

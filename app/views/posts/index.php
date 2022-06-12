@@ -19,14 +19,17 @@
                     <input type="submit" name="delete" value="delete" class="btn red">
                 </form>
             <?php endif; ?>
+        
             <h2>
                 <?php echo $post->title; ?>
             </h2>
             <p>
                 <?php echo $post->body; ?>
             </p>
+
+            <img src="<?php echo URLROOT . "/public/assets/img/" . $post->image?>" alt="" width="100px" height="100px">
             <small>
-                <?php echo "Date Created: " . date('F j h:m', strtotime($post->created_at)); ?>
+                <?php echo "Date Created: " . date('M d, Y', strtotime($post->created_at)); ?>
             </small>
         </div>
     <?php endforeach; ?>

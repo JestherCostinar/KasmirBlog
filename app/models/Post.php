@@ -24,12 +24,14 @@ class Post
 
     public function insertPost($data)
     {
-        $this->db->query("INSERT INTO posts (user_id, title, body)
-        VALUES (:user_id, :title, :body)");
+        $this->db->query("INSERT INTO posts (user_id, title, body, image, created_at)
+        VALUES (:user_id, :title, :body, :image, :date)");
         $this->db->bind(':user_id', $data['user_id']);
         $this->db->bind(':title', $data['postTitle']);
         $this->db->bind(':body', $data['body']);
-
+        $this->db->bind(':image', $data['path']);
+        $this->db->bind(':date', date("Y-m-d H:i:s"))
+        ;
         if ($this->db->execute()) {
             return true;
         } else {
@@ -46,11 +48,11 @@ class Post
 
     public function updatePost($data)
     {
-        $this->db->query("UPDATE posts SET title = :title, body = :body WHERE id = :id");
+        $this->db->query("UPDATE posts SET title = :title, body = :body, image = :image WHERE id = :id");
         $this->db->bind(':id', $data['id']);
         $this->db->bind(':title', $data['postTitle']);
         $this->db->bind(':body', $data['body']);
-
+        $this->db->bind(':image', $data['path']);
         if ($this->db->execute()) {
             return true;
         } else {

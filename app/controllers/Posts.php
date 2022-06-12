@@ -45,7 +45,8 @@ class Posts extends Controller
                 'postTitle' => trim($_POST['postTitle']),
                 'body' => trim($_POST['body']),
                 'titleError' => '',
-                'bodyError' => ''
+                'bodyError' => '',
+                'path' => ''
             ];
 
             if (empty($data['postTitle'])) {
@@ -56,7 +57,21 @@ class Posts extends Controller
                 $data['bodyError'] = 'Please enter a body';
             }
 
+            if (!is_dir(APPROOT . '/../public/assets/img/')) {
+                mkdir(APPROOT . '/../public/assets/img/');
+            }
+
             if (empty($data['titleError']) && empty($data['bodyError'])) {
+                $image = $_FILES['image'] ?? null;
+                $imagePath = '';
+                if ($image && $image['tmp_name']) {
+                    $imagePath = randomString(8) . '/' . $image['name'];
+                    mkdir(dirname(APPROOT . '/../public/assets/img/' . $imagePath));
+                    move_uploaded_file($image['tmp_name'], APPROOT . '/../public/assets/img/' . $imagePath);
+                }
+
+                $data['path'] = $imagePath;
+
                 if ($this->postsModel->insertPost($data)) {
                     header("location: " . URLROOT . "/posts");
                 } else {
@@ -86,8 +101,13 @@ class Posts extends Controller
             'postTitle' => '',
             'body' => '',
             'titleError' => '',
-            'bodyError' => ''
+            'bodyError' => '',
+            'path' => ''
         ];
+
+
+
+        echo $post->image;
 
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -100,7 +120,8 @@ class Posts extends Controller
                 'postTitle' => trim($_POST['postTitle']),
                 'body' => trim($_POST['body']),
                 'titleError' => '',
-                'bodyError' => ''
+                'bodyError' => '',
+                'path' => ''
             ];
 
             if (empty($data['postTitle'])) {
@@ -120,6 +141,21 @@ class Posts extends Controller
             }
 
             if (empty($data['titleError']) && empty($data['bodyError'])) {
+                $image = $_FILES['image'] ?? null;
+                $imagePath = $post->image;
+
+                if ($image && $image['tmp_name']) {
+                    if ($post->image) {
+                        unlink(APPROOT . '/../public/assets/img/' . $post->image);
+                    }
+
+                    $imagePath = randomString(8) . '/' . $image['name'];
+                    mkdir(dirname(APPROOT . '/../public/assets/img/' . $imagePath));
+                    move_uploaded_file($image['tmp_name'], APPROOT . '/../public/assets/img/' . $imagePath);
+                } 
+                
+                $data['path'] = $imagePath;
+
                 if ($this->postsModel->updatePost($data)) {
                     header("location: " . URLROOT . "/posts");
                 } else {
@@ -155,8 +191,8 @@ class Posts extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-        
-            if($this->postsModel->deletePost($id)) {
+
+            if ($this->postsModel->deletePost($id)) {
                 header("location: " . URLROOT . "/posts");
             } else {
                 die('Something went wrong');
