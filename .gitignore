@@ -1,2 +1,3 @@
-/app/config/env.php
-libraries/Database
+/app/config/
+app/libraries/Database.php
+app/controllers/Auth.php
