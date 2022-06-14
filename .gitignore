@@ -1,2 +1,2 @@
-/app/config
+/app/config/env.php
 libraries/Database
