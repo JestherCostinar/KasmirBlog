@@ -1,7 +1,15 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require APPROOT . '/PHPMailer-master/PHPMailer-master/src/Exception.php';
+require APPROOT . '/PHPMailer-master/PHPMailer-master/src/PHPMailer.php';
+require APPROOT . '/PHPMailer-master/PHPMailer-master/src/SMTP.php';
+
 class Auth extends Controller
 {
+
     public function __construct()
     {
         $this->userModel = $this->model('User');
@@ -32,6 +40,7 @@ class Auth extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
+                'title' => 'Register',
                 'username' => trim($_POST['username']),
                 'email' => trim($_POST['email']),
                 'password' => trim($_POST['password']),
@@ -41,7 +50,6 @@ class Auth extends Controller
                 'passwordError' => '',
                 'confirmPasswordError' => ''
             ];
-
             // Validate Username. Accept only a-z, A-Z and 0-9
             $nameValidation = "/^[a-zA-Z0-9]*$/";
 
@@ -92,10 +100,11 @@ class Auth extends Controller
             if (empty($data['usernameError']) && empty($data['emailError']) && empty($data['passwordError']) && empty($data['confirmPasswordError'])) {
                 // Hash password
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-
                 // Register user from model function
-                if ($this->userModel->register($data)) {
-                    header('Location: ' . URLROOT . '/auth/login');
+                $user_id = $this->userModel->register($data);
+                if ($this->userModel->oneTimePassword($user_id)) {
+                    $_SESSION['account_to_verify'] = $user_id;
+                    header('Location: ' . URLROOT . '/auth/verifyAccount');
                 } else {
                     die("Something went wrong");
                 }
@@ -104,6 +113,76 @@ class Auth extends Controller
 
         $this->view('pages/register', $data);
     }
+
+
+    // Verify account controller 
+    public function verifyAccount()
+    {
+        $verificationCode = $this->userModel->findUserVerificationCodeByID($_SESSION['account_to_verify'])->verification_code;
+        $user_id = $this->userModel->findUserVerificationCodeByID($_SESSION['account_to_verify'])->user_id;
+        $recipient = $this->userModel->findUserById($user_id)->email;
+        
+        $this->verifyByEmail($recipient, $verificationCode);
+
+        $data = [
+            'title' => 'Verify Account',
+            'errorMessage' => '',
+            'verificationCodeError' => ''
+        ];
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'title' => 'Verify Account',
+                'verificationCodeError' => '',
+                'verificationCode' => $_POST['verificationCode']
+            ];
+
+            if ($data['verificationCode'] === $verificationCode) {
+                if ($this->userModel->updateAccountStatus($_SESSION['account_to_verify'])) {
+                    unset($_SESSION['account_to_verify']);
+                    header('Location: ' . URLROOT . '/auth/');
+                }
+            } else {
+                $data['verificationCodeError'] = 'Invalid Code. Try again.';
+            }
+        }
+
+        $this->view('pages/verify-account', $data);
+    }
+
+    public function verifyByEmail($recepient, $body)
+    {
+        $mail = new PHPMailer(true);
+
+        try {
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'accura.find1@gmail.com';
+            $mail->Password = 'emviozyeetqehyyb';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+            //Recipients
+            $mail->setFrom('jesther.jc15@gmail.com', 'Kasmir Blog');
+
+            //Add a recipient
+            $mail->addAddress($recepient, 'rasdasd');
+
+            //Set email format to HTML
+            $mail->isHTML(true);
+
+            $mail->Subject = 'Email verification';
+            $mail->Body    = '<p>To Activate Account, enter verification code: <b style="font-size: 30px;">' . $body . '</b>' . '. NEVER share this code with others under any circumstances.' . '</p>';
+
+            $mail->send();
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+    }
+
 
     // User login Controller
     public function login()
@@ -122,6 +201,8 @@ class Auth extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
+                'title' => 'Login',
+                'errorMessage' => '',
                 'username' => $_POST['username'],
                 'password' => $_POST['password'],
                 'usernameError' => '',
@@ -142,10 +223,9 @@ class Auth extends Controller
 
                 if ($loggedInUser) {
                     $this->createUserSession($loggedInUser);
-
-                    header("location: " . URLROOT);
                 } else {
                     $data['errorMessage'] = 'Invalid Username or Password. Please Try again.';
+                    $this->view('pages/login', $data);
                 }
             }
         } else {
@@ -165,6 +245,7 @@ class Auth extends Controller
         $_SESSION['user_id'] = $user->id;
         $_SESSION['username'] = $user->username;
         $_SESSION['email'] = $user->email;
+        header('location:' . URLROOT . '/pages/index');
     }
 
     public function logout()

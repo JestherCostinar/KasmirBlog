@@ -11,8 +11,11 @@ class Posts extends Controller
     {
         if (isLoggedIn()) {
             $posts = $this->postsModel->findUserPost($_SESSION['user_id']);
+            echo "login";
+            echo $_SESSION['user_id'];
         } else {
             $posts = $this->postsModel->findAllPosts();
+            echo "login";
         }
 
         $data = [

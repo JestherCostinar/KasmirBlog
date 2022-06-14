@@ -1,0 +1,17 @@
+{
+    "name": "pc/app",
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jesther Costinar",
+            "email": "jesther.jc15@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.6"
+    }
+}

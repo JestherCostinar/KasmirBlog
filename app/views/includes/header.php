@@ -10,9 +10,8 @@
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
-    <!-- Bootstrap CDN link -->
-	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- custom css file link  -->
+    <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="<?php echo URLROOT ?>/public/assets/css/style.css">
 
 </head>

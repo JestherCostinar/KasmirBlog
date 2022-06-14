@@ -149,11 +149,14 @@ require APPROOT . '/views/includes/navigation.php';
                 <div class="box">
                     <h3 class="title">about me</h3>
                     <div class="about">
-                        <img src="<?php echo URLROOT ?>/public/assets/img/default.jpeg" alt="" />
+                        <?php if (!$data['userProfile']->image) : ?>
+                            <img class="profile-img" src="<?php echo URLROOT ?>/public/assets/img/default.jpeg" alt="" />
+                        <?php else : ?>
+                            <img class="profile-img" src="<?php echo URLROOT . "/public/assets/img/" . $data['userProfile']->image ?>" alt="" />
+                        <?php endif; ?>
                         <h3><?php echo $data['userProfile']->username; ?></h3>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Similique, officia.
+                            <?php echo $data['userProfile']->description; ?>
                         </p>
                         <div class="follow">
                             <a href="#" class="fab fa-facebook-f"></a>

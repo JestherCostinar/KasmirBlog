@@ -8,13 +8,13 @@
             <a href="#contact">contact me</a>
         <?php endif; ?>
 
-        <?php if (isset($_SESSION['user_id'])) : ?>
+        <?php if (isLoggedIn()): ?>
             <a href="<?php echo URLROOT; ?>/users/">Profile</a>
         <?php endif; ?>
     </nav>
 
     <div class="icons">
-        <?php if (isset($_SESSION['user_id'])) : ?>
+        <?php if (isLoggedIn()) : ?>
             <button class="btn login" onclick="window.location.href = '<?php echo URLROOT; ?>/auth/logout';">Logout </button>
         <?php else : ?>
             <button class="btn login" onclick="window.location.href = '<?php echo URLROOT; ?>/auth';">Login</button>

@@ -3,7 +3,6 @@ require APPROOT . '/views/includes/header.php';
 require APPROOT . '/views/includes/navigation.php';
 ?>
 
-
 <div class="container">
     <?php if (isLoggedIn()) : ?>
         <a href="<?php echo URLROOT ?>/posts/create" class="btn green">Create</a>

@@ -2,7 +2,7 @@
 
 // App config
 define("APPROOT", dirname(dirname(__FILE__)));
-define("URLROOT", "http://localhost/KasmirBlog");
+define("URLROOT", "http://localhost/kasmirblog");
 define("SITENAME", "Kasmir Blog");
 define("AUTHOR", "Jesther Costinar");
 
