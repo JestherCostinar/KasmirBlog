@@ -2,7 +2,7 @@
 
 ---
 ![banner-kasmir-blog](https://user-images.githubusercontent.com/56688615/173782543-72898098-c8da-490b-8a55-436e1211cb10.JPG)
-Made a structured Mvc Framework with PHP and Build a Blog Website shop for my personalblog
+Made a structured Mvc Framework with PHP and Build a Blog Website by my self
 
 to use the project you must edit the config file in app/config/env.php and enter the corresponding data
 
