@@ -1,5 +1,6 @@
 let menu = document.querySelector('#menu-bars');
 let navbar = document.querySelector('.navbar');
+const twitterBtn = document.querySelector(".twitter");
 
 menu.onclick = () =>{
   menu.classList.toggle('fa-times');
@@ -24,3 +25,8 @@ window.onscroll = () =>{
   searchIcon.classList.remove('fa-times');
   searchForm.classList.remove('active');
 }
+
+twitterBtn.addEventListener("click", () => {
+  let tweetUrl = `https://twitter.com/intent/tweet?url=${navbar.innerText}`;
+  window.open(tweetUrl, "_blank");
+});

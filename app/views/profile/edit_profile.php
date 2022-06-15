@@ -12,10 +12,10 @@ require APPROOT . '/views/includes/navigation.php';
             <h3 class="title">about me</h3>
             <div class="about">
                 <form action="<?php echo URLROOT; ?>/users/editProfile" method="POST" class="form" enctype="multipart/form-data">
-                    <?php if (!$data['userInfo']->image) : ?>
+                    <?php if (!$data['userInfo']->profile_picture) : ?>
                         <img class="profile-img" src="<?php echo URLROOT ?>/public/assets/img/default.jpeg" alt="" />
                     <?php else : ?>
-                        <img class="profile-img" src="<?php echo URLROOT . "/public/assets/img/" . $data['userInfo']->image ?>" alt="" />
+                        <img class="profile-img" src="<?php echo URLROOT . "/public/assets/img/" . $data['userInfo']->profile_picture ?>" alt="" />
                     <?php endif; ?>
                     <div class="form-group">
                         <label for="">Profile Picture</label>

@@ -5,17 +5,23 @@ class Pages extends Controller
     public function __construct()
     {
         $this->userModel = $this->model('User');
+        $this->postsModel = $this->model('Post');
     }
 
     public function index()
     {
         if (isLoggedIn()) {
             $userProfile = $this->userModel->findUserById($_SESSION['user_id']);
-        } 
+        } else {
+            $userProfile = [];
+        }
+        $posts = $this->postsModel->findAllPosts();
+
 
         $data = [
             'title' => 'Home',
-            'userProfile' => $userProfile
+            'userProfile' => $userProfile,
+            'posts' => $posts
         ];
 
         $this->view('pages/index', $data);

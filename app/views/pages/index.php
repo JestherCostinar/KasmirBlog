@@ -17,12 +17,11 @@ require APPROOT . '/views/includes/navigation.php';
 
     <section class="banner" id="banner">
         <div class="content">
-            <h3>explore the nature</h3>
+            <h3>Lin Tech</h3>
             <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-                laboriosam?
+            All You Need To Know on How to get rid on lintech Coding.
             </p>
-            <a href="#" class="btn">my blogs</a>
+            <a href="<?php echo URLROOT ?>/posts/" class="btn">my blogs</a>
         </div>
     </section>
 
@@ -32,116 +31,20 @@ require APPROOT . '/views/includes/navigation.php';
 
     <section class="container" id="posts">
         <div class="posts-container">
-            <div class="post">
-                <img src="<?php echo URLROOT ?>/public/assets/img/blog-1.jpg" alt="" class="image" />
-                <div class="date">
-                    <i class="far fa-clock"></i>
-                    <span>1st may, 2021</span>
+            <?php foreach ($data['posts'] as $post) : ?>
+                <div class="post">
+                    <img src="<?php echo URLROOT . "/public/assets/img/" . $post->image ?>" alt="" class="image" />
+                    <div class="date">
+                        <i class="far fa-clock"></i>
+                        <span><?php echo date('M d, Y', strtotime($post->created_at)); ?></span>
+                    </div>
+                    <h3 class="title"><?php echo $post->title; ?></h3>
+                    <p class="text">
+                        <?php echo $post->body; ?>
+                    </p>
                 </div>
-                <h3 class="title">blog title goes here</h3>
-                <p class="text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum
-                    molestias rerum numquam, quos aut est culpa quisquam excepturi sed a
-                    inventore dicta tempore consequuntur possimus magnam corporis cum
-                    doloremque quasi fugiat exercitationem aliquid cupiditate pariatur.
-                    Dolor laboriosam voluptatem ex praesentium magni error debitis
-                    maxime alias autem distinctio. Fuga, esse velit!
-                </p>
-                <p class="text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto,
-                    reiciendis fugiat quas nemo quia omnis repellat obcaecati quaerat
-                    voluptates fuga error dicta cupiditate pariatur soluta dolorum quis
-                    eum quibusdam quam?
-                </p>
-                <div class="links">
-                    <a href="#" class="user">
-                        <i class="far fa-user"></i>
-                        <span>by admin</span>
-                    </a>
-                    <a href="#" class="icon">
-                        <i class="far fa-comment"></i>
-                        <span>(45)</span>
-                    </a>
-                    <a href="#" class="icon">
-                        <i class="far fa-share-square"></i>
-                        <span>(29)</span>
-                    </a>
-                </div>
-            </div>
+            <?php endforeach; ?>
 
-            <div class="post">
-                <img src="<?php echo URLROOT ?>/public/assets/img/blog-2.jpg" alt="" class="image" />
-                <div class="date">
-                    <i class="far fa-clock"></i>
-                    <span>1st may, 2021</span>
-                </div>
-                <h3 class="title">blog title goes here</h3>
-                <p class="text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum
-                    molestias rerum numquam, quos aut est culpa quisquam excepturi sed a
-                    inventore dicta tempore consequuntur possimus magnam corporis cum
-                    doloremque quasi fugiat exercitationem aliquid cupiditate pariatur.
-                    Dolor laboriosam voluptatem ex praesentium magni error debitis
-                    maxime alias autem distinctio. Fuga, esse velit!
-                </p>
-                <p class="text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto,
-                    reiciendis fugiat quas nemo quia omnis repellat obcaecati quaerat
-                    voluptates fuga error dicta cupiditate pariatur soluta dolorum quis
-                    eum quibusdam quam?
-                </p>
-                <div class="links">
-                    <a href="#" class="user">
-                        <i class="far fa-user"></i>
-                        <span>by admin</span>
-                    </a>
-                    <a href="#" class="icon">
-                        <i class="far fa-comment"></i>
-                        <span>(45)</span>
-                    </a>
-                    <a href="#" class="icon">
-                        <i class="far fa-share-square"></i>
-                        <span>(29)</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="post">
-                <img src="<?php echo URLROOT ?>/public/assets/img/blog-3.jpg" alt="" class="image" />
-                <div class="date">
-                    <i class="far fa-clock"></i>
-                    <span>1st may, 2021</span>
-                </div>
-                <h3 class="title">blog title goes here</h3>
-                <p class="text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum
-                    molestias rerum numquam, quos aut est culpa quisquam excepturi sed a
-                    inventore dicta tempore consequuntur possimus magnam corporis cum
-                    doloremque quasi fugiat exercitationem aliquid cupiditate pariatur.
-                    Dolor laboriosam voluptatem ex praesentium magni error debitis
-                    maxime alias autem distinctio. Fuga, esse velit!
-                </p>
-                <p class="text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto,
-                    reiciendis fugiat quas nemo quia omnis repellat obcaecati quaerat
-                    voluptates fuga error dicta cupiditate pariatur soluta dolorum quis
-                    eum quibusdam quam?
-                </p>
-                <div class="links">
-                    <a href="#" class="user">
-                        <i class="far fa-user"></i>
-                        <span>by admin</span>
-                    </a>
-                    <a href="#" class="icon">
-                        <i class="far fa-comment"></i>
-                        <span>(45)</span>
-                    </a>
-                    <a href="#" class="icon">
-                        <i class="far fa-share-square"></i>
-                        <span>(29)</span>
-                    </a>
-                </div>
-            </div>
         </div>
 
         <div class="sidebar">
@@ -149,10 +52,10 @@ require APPROOT . '/views/includes/navigation.php';
                 <div class="box">
                     <h3 class="title">about me</h3>
                     <div class="about">
-                        <?php if (!$data['userProfile']->image) : ?>
+                        <?php if (!$data['userProfile']->profile_picture) : ?>
                             <img class="profile-img" src="<?php echo URLROOT ?>/public/assets/img/default.jpeg" alt="" />
                         <?php else : ?>
-                            <img class="profile-img" src="<?php echo URLROOT . "/public/assets/img/" . $data['userProfile']->image ?>" alt="" />
+                            <img class="profile-img" src="<?php echo URLROOT . "/public/assets/img/" . $data['userProfile']->profile_picture ?>" alt="" />
                         <?php endif; ?>
                         <h3><?php echo $data['userProfile']->username; ?></h3>
                         <p>
@@ -170,55 +73,39 @@ require APPROOT . '/views/includes/navigation.php';
             <div class="box">
                 <h3 class="title">categories</h3>
                 <div class="category">
-                    <a href="#"> travel <span>42</span></a>
-                    <a href="#"> photography <span>75</span> </a>
-                    <a href="#"> technology <span>22</span> </a>
-                    <a href="#"> fashion <span>17</span> </a>
-                    <a href="#"> study <span>48</span> </a>
-                    <a href="#"> science <span>39</span> </a>
-                    <a href="#"> music <span>59</span> </a>
-                    <a href="#"> public <span>12</span> </a>
-                    <a href="#"> business <span>32</span> </a>
-                    <a href="#"> sports <span>18</span> </a>
+                    <a href="#"> HTML </a>
+                    <a href="#"> CSS </a>
+                    <a href="#"> JAVASCRIPT </a>
+                    <a href="#"> PHP </a>
+                    <a href="#"> MYSQL </a>
+                    <a href="#"> LARAVEL </a>
+                    <a href="#"> WORDPRESS </a>
+                    <a href="#"> JAVA </a>
+                    <a href="#"> PYTHON </a>
                 </div>
             </div>
 
             <div class="box">
                 <h3 class="title">popular posts</h3>
                 <div class="p-post">
-                    <a href="#">
-                        <h3>01. blog title goes here</h3>
-                        <span><i class="far fa-clock"></i>1st may, 2021</span>
-                    </a>
-                    <a href="#">
-                        <h3>02. blog title goes here</h3>
-                        <span><i class="far fa-clock"></i>1st may, 2021</span>
-                    </a>
-                    <a href="#">
-                        <h3>03. blog title goes here</h3>
-                        <span><i class="far fa-clock"></i>1st may, 2021</span>
-                    </a>
-                    <a href="#">
-                        <h3>04. blog title goes here</h3>
-                        <span><i class="far fa-clock"></i>1st may, 2021</span>
-                    </a>
+                    <?php foreach ($data['posts'] as $i => $post) : ?>
+                        <a href="#">
+                            <h3><?php echo $i+1 . ' ' . $post->title; ?></h3>
+                            <span><i class="far fa-clock"></i><?php echo date('M d, Y', strtotime($post->created_at)); ?></span>
+                        </a>
+                    <?php endforeach; ?>
+
                 </div>
             </div>
 
             <div class="box">
                 <h3 class="title">popular tags</h3>
                 <div class="tags">
-                    <a href="#">travel</a>
-                    <a href="#">photo</a>
-                    <a href="#">science</a>
-                    <a href="#">biology</a>
-                    <a href="#">aliens</a>
-                    <a href="#">nature</a>
-                    <a href="#">mountain</a>
-                    <a href="#">river</a>
-                    <a href="#">camp</a>
-                    <a href="#">landscape</a>
-                    <a href="#">world</a>
+                    <a href="#">PHP</a>
+                    <a href="#">LARAVEL</a>
+                    <a href="#">PYTHON</a>
+                    <a href="#">JAVASCRIPT</a>
+
                 </div>
             </div>
         </div>
@@ -257,7 +144,8 @@ require APPROOT . '/views/includes/navigation.php';
         </div>
 
         <div class="credit">
-            created by <span>mr. web designer</span> | all rights reserved
+            &copy; Copyright 2022
+            <span>Kasmir Blog</span> | all rights reserved
         </div>
     </section>
 

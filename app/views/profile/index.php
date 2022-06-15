@@ -8,10 +8,10 @@ require APPROOT . '/views/includes/navigation.php';
         <div class="box">
             <h3 class="title">about me</h3>
             <div class="about">
-                <?php if(!$data['userInfo']->image): ?>
+                <?php if(!$data['userInfo']->profile_picture): ?>
                     <img class="profile-img" src="<?php echo URLROOT ?>/public/assets/img/default.jpeg" alt="" />
                 <?php else :?>
-                    <img class="profile-img" src="<?php echo URLROOT . "/public/assets/img/" . $data['userInfo']->image ?>" alt="" />
+                    <img class="profile-img" src="<?php echo URLROOT . "/public/assets/img/" . $data['userInfo']->profile_picture ?>" alt="" />
                 <?php endif; ?>
                 <h3><?php echo $data['userInfo']->username; ?></h3>
                 <p>

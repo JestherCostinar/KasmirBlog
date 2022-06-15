@@ -11,14 +11,14 @@ class Post
 
     public function findUserPost($id)
     {
-        $this->db->query("SELECT * FROM posts WHERE user_id = :id");
+        $this->db->query("SELECT users.username, posts.* FROM posts INNER JOIN users ON posts.user_id = users.id WHERE user_id = :id");
         $this->db->bind(':id', $id);
         return $results = $this->db->resultset();
     }
 
     public function findAllPosts()
     {
-        $this->db->query("SELECT * FROM posts ORDER BY created_at ASC");
+        $this->db->query("SELECT users.username, posts.* FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY created_at ASC");
         return $results = $this->db->resultset();
     }
 

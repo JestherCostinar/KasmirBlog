@@ -97,7 +97,7 @@ class User
     // Update Profile 
     public function updateUser($data)
     {
-        $this->db->query("UPDATE users SET image = :image, username = :name, description = :description WHERE id = :id");
+        $this->db->query("UPDATE users SET profile_picture = :image, username = :name, description = :description WHERE id = :id");
         $this->db->bind(':id', $data['id']);
         $this->db->bind(':image', $data['path']);
         $this->db->bind(':name', $data['name']);
