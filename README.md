@@ -1,13 +1,14 @@
 ## General Info
 
 ---
-![Kasmir-blog-hero](https://user-images.githubusercontent.com/56688615/173217081-49a94d45-1fa0-46a0-a044-69afd28ae8b6.JPG)
-Made a structured Mvc Framework with PHP and Build a Blog Website shop for my personalblog
+![banner-kasmir-blog](https://user-images.githubusercontent.com/56688615/173782543-72898098-c8da-490b-8a55-436e1211cb10.JPG)
+Made a structured Mvc Framework with PHP and Build a Blog Website by my self
 
 to use the project you must edit the config file in app/config/env.php and enter the corresponding data
 
 ### Screenshot
-![Image text](<img src="/KasmirBlog/public/assets/img/banner.jpg">)
+![blog](https://user-images.githubusercontent.com/56688615/173782993-33495550-d892-4bb4-8be4-cacf09abfbcb.JPG)
+
 
 ## Installation
 
