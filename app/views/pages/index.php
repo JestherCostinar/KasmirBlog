@@ -17,9 +17,8 @@ require APPROOT . '/views/includes/navigation.php';
 
     <section class="banner" id="banner">
         <div class="content">
-            <h3>Lin Tech</h3>
-            <p>
-            All You Need To Know on How to get rid on lintech Coding.
+            <h3>KASMIR BLOG</h3>
+            <p>a tech blog created by Jesther Costinar. You can find posts featuring tips, tech news and things to know in development.
             </p>
             <a href="<?php echo URLROOT ?>/posts/" class="btn">my blogs</a>
         </div>
@@ -90,7 +89,7 @@ require APPROOT . '/views/includes/navigation.php';
                 <div class="p-post">
                     <?php foreach ($data['posts'] as $i => $post) : ?>
                         <a href="#">
-                            <h3><?php echo $i+1 . ' ' . $post->title; ?></h3>
+                            <h3><?php echo $i + 1 . ' ' . $post->title; ?></h3>
                             <span><i class="far fa-clock"></i><?php echo date('M d, Y', strtotime($post->created_at)); ?></span>
                         </a>
                     <?php endforeach; ?>
@@ -116,14 +115,14 @@ require APPROOT . '/views/includes/navigation.php';
     <!-- contact section starts  -->
 
     <section class="contact" id="contact">
-        <form action="<?php echo URLROOT?>/pages/contact" method="POST">
+        <form action="<?php echo URLROOT ?>/pages/contact" method="POST">
             <h3>contact me</h3>
             <div class="inputBox">
                 <input type="text" placeholder="name" name="name" />
                 <input type="email" placeholder="email" name="email" />
             </div>
             <div class="inputBox">
-                <input type="number" placeholder="number" name="number"/>
+                <input type="number" placeholder="number" name="number" />
                 <input type="text" placeholder="subject" name="subject" />
             </div>
             <textarea name="body" placeholder="message" id="" cols="30" rows="10"></textarea>
