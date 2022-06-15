@@ -73,7 +73,7 @@ class Auth extends Controller
                 $data['emailError'] = 'Please enter email address.';
                 $data['email'] = '';
             } elseif (!preg_match($emailValidation, $data['email'])) {
-                $data['emailError'] = 'Only accepting .my.jru.edu email.';
+                $data['emailError'] = 'Only accepting gmail.com email.';
                 $data['email'] = '';
             } else {
                 if ($this->userModel->findUserByEmail($data['email'])) {
