@@ -9,6 +9,7 @@ class Post
         $this->db = new Database;
     }
 
+    // --INNER JOIN-- fetch the data in users and posts table by ID.
     public function findUserPost($id)
     {
         $this->db->query("SELECT users.username, posts.* FROM posts INNER JOIN users ON posts.user_id = users.id WHERE user_id = :id");
@@ -16,6 +17,7 @@ class Post
         return $results = $this->db->resultset();
     }
 
+    // --INNER JOIN-- fetch the data in users and posts table by ID.
     public function findAllPosts()
     {
         $this->db->query("SELECT users.username, posts.* FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY created_at ASC");

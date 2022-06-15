@@ -11,7 +11,7 @@ class Core
         $url = $this->getUrl();
         $url = $this->getController($url);
         $url = $this->getMethod($url);
-        
+
         // Get parameters
         $this->params = $url ? array_values($url) : [];
 
@@ -41,10 +41,11 @@ class Core
     {
         try {
             if (isset($url[0])) {
-                if (file_exists("../app/controllers/" . ucwords($url[0]) . '.php'));
-                $this->currentController = ucwords($url[0]);
-                unset($url[0]);
-            } 
+                if (file_exists("../app/controllers/" . ucwords($url[0]) . '.php')) {
+                    $this->currentController = ucwords($url[0]);
+                    unset($url[0]);
+                }
+            }
 
             require "../app/controllers/" . $this->currentController . ".php";
             $this->currentController = new $this->currentController;

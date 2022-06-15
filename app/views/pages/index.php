@@ -116,17 +116,17 @@ require APPROOT . '/views/includes/navigation.php';
     <!-- contact section starts  -->
 
     <section class="contact" id="contact">
-        <form action="">
+        <form action="<?php echo URLROOT?>/pages/contact" method="POST">
             <h3>contact me</h3>
             <div class="inputBox">
-                <input type="text" placeholder="name" />
-                <input type="email" placeholder="email" />
+                <input type="text" placeholder="name" name="name" />
+                <input type="email" placeholder="email" name="email" />
             </div>
             <div class="inputBox">
-                <input type="number" placeholder="number" />
-                <input type="text" placeholder="subject" />
+                <input type="number" placeholder="number" name="number"/>
+                <input type="text" placeholder="subject" name="subject" />
             </div>
-            <textarea name="" placeholder="message" id="" cols="30" rows="10"></textarea>
+            <textarea name="body" placeholder="message" id="" cols="30" rows="10"></textarea>
             <input type="submit" value="send message" class="btn" />
         </form>
     </section>
