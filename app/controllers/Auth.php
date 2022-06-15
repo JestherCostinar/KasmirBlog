@@ -62,7 +62,12 @@ class Auth extends Controller
             }
 
             // Validate email. Accept only jru email
-            $emailValidation = '|^[A-Z0-9._%+-]+@my\.jru\.edu$|i';
+
+            // ============ Accept only my.jru.edu domain ================= //
+            // $emailValidation = '|^[A-Z0-9._%+-]+@my\.jru\.edu$|i';       //
+            // ============================================================ //
+
+            $emailValidation = '|^[A-Z0-9._%+-]+@gmail\.com$|i';
 
             if (empty($data['email'])) {
                 $data['emailError'] = 'Please enter email address.';
